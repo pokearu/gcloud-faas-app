@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Sentence Length</title>
+  </head>
+  <body>
+    <div style="padding: 0em;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <i class="fa fa-book" aria-hidden="true" style="color: darkcyan;" class="d-inline-block align-top" loading="lazy"></i>
+            Welcome to Sentence Length</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="nav navbar-nav">
+            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Home</a>
+            <a class="nav-link active" id="Create-tab" data-toggle="tab" href="#Create" role="tab" aria-controls="Create" aria-selected="true">Create</a>
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+          </div>
+        </div>
+    </nav>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">Welcome Home</div>
+        <div class="tab-pane fade show active" id="Create" role="tabpanel" aria-labelledby="Create-tab">
+            <div class="container" style="padding: 1em;">
+                <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Enter a book URL</h5>
+                          <!-- <h6 class="card-subtitle mb-2 text-muted"></h6> -->
+                          <p class="card-text text-muted">Enter a URL of the ebook you wish to analyze. Ex: 
+                              <a target="_blank" href="http://www.gutenberg.org/files/1342/1342-0.txt">Pride and Prejudice</a>
+                            </p>
+                            <div class="form-group">
+                                <!-- <label for="ebookUrl">Email address</label> -->
+                                <input type="url" class="form-control" id="ebookUrl" aria-describedby="ebookUrlHelp" placeholder="http://www.gutenberg.org/files/1342/1342-0.txt">
+                                <!-- <small id="ebookUrlHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                              </div>
+                            <button onclick="sentenceParserURL()" class="btn btn-primary">Submit</button>
+                          <!-- <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a> -->
+                        </div>
+                      </div>                  
+                  </div>
+                  <div class="col-2">
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <canvas id="histogram" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Welcome Contact</div>
+    </div>
+    </div>
+    
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js'></script>
+    <script src="./config.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+'use strict';
+
+const request = require('request');
+
+exports.sentenceParser = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    switch (req.method) {
+        case 'OPTIONS':
+            {   // Send response to OPTIONS requests
+                res.set('Access-Control-Allow-Methods', 'GET, POST')
+                res.set('Access-Control-Allow-Headers', 'Content-Type')
+                res.set('Access-Control-Max-Age', '3600')
+                res.status(204).send('')
+                break
+            }
+        case 'GET':
+            {
+                res.status(200).send("Welcome")
+                break
+            }
+        case 'POST':
+            {
+                let ebookUrl = req.body.ebookUrl
+                let sentenceMap = {}
+
+                request.get(ebookUrl).on("data", (data) => {
+                    console.log("Got data of size : " + data.length)
+                    let dataString = data.toString()
+                    let sentences = dataString.match(/\b((?!=|\.).)+(.)\b/g)
+
+                    let intermediateMap = sentences.reduce((acc,sentence) => {
+                        let key = sentence.split(" ").length
+                        return {...acc, [key]: [...(acc[key] || []), sentence]}
+                    }, sentenceMap)
+
+                    sentenceMap = intermediateMap
+                }).on("error", (error) => {
+                    console.error("eBook GET error: "+ error.message)
+                    res.status(500).send(error.message)
+                }).on("complete", (status) => {
+                    console.log("eBook analysis complete")
+                    res.status(200).send(sentenceMap)
+                })
+            }
+    }
+}
