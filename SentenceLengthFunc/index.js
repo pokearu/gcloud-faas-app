@@ -30,7 +30,8 @@ exports.sentenceParser = (req, res) => {
 
                     let intermediateMap = sentences.reduce((acc,sentence) => {
                         let key = sentence.split(" ").length
-                        return {...acc, [key]: [...(acc[key] || []), sentence]}
+                        // return {...acc, [key]: [...(acc[key] || []), sentence]}
+                        return {...acc, [key]: acc[key] + 1 || 1}
                     }, sentenceMap)
 
                     sentenceMap = intermediateMap

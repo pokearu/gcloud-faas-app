@@ -1,5 +1,6 @@
 'use strict';
 
 let config = {
-    "sentenceParserURL": "https://us-central1-aravind-ramalingam.cloudfunctions.net/sentenceParser"
+    "sentenceParserURL": "https://us-central1-aravind-ramalingam.cloudfunctions.net/sentenceParser",
+    "dataCacheURL": "https://us-central1-aravind-ramalingam.cloudfunctions.net/dataCache"
 }
