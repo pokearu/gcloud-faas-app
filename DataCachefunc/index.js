@@ -53,3 +53,28 @@ exports.dataCache = (req, res) => {
             }
     }
 }
+
+exports.queryCache = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    switch (req.method) {
+        case 'OPTIONS':
+            {   // Send response to OPTIONS requests
+                res.set('Access-Control-Allow-Methods', 'GET, POST')
+                res.set('Access-Control-Allow-Headers', 'Content-Type')
+                res.set('Access-Control-Max-Age', '3600')
+                res.status(204).send('')
+                break
+            }
+        case 'GET':
+            {
+                const query = datastore.createQuery('SentenceFrequency').limit(8)
+                datastore.runQuery(query).then((data) => {
+                    const entities = data[0]
+                    res.status(200).send(entities)
+                }).catch((error) => {
+                    console.error(error.message)
+                    res.status(500).send(error.message)
+                })
+            }
+        }
+}

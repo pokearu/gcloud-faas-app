@@ -10,30 +10,47 @@
 
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Sentence Length</title>
+    <title>eBookify</title>
   </head>
   <body>
     <div style="padding: 0em;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <i class="fa fa-book" aria-hidden="true" style="color: darkcyan;" class="d-inline-block align-top" loading="lazy"></i>
-            Welcome to Sentence Length</a>
+            eBookify</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="nav navbar-nav">
-            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Home</a>
-            <a class="nav-link active" id="Create-tab" data-toggle="tab" href="#Create" role="tab" aria-controls="Create" aria-selected="true">Create</a>
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+            <a class="nav-link" id="Create-tab" data-toggle="tab" href="#Create" role="tab" aria-controls="Create" aria-selected="false">Create</a>
+            <!-- <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a> -->
           </div>
         </div>
     </nav>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">Welcome Home
-            
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 order-md-1 text-center text-md-left pr-md-5">
+                        <h1 class="mb-3">Analyze eBooks, and see how authors play with sentence lengths!</h1>
+                        <p class="lead mb-4">
+                            Here we take different eBooks from the <a href="http://www.gutenberg.org/" target="_blank">Gutenberg project</a> and run analysis. We are a simple FaaS application that runs on GCloud! The App parses the the plain text version of the eBooks and draws a histogram of the senetence length distribution. Feel free to hit <strong>Create</strong> and try us out.
+                        </p>
+                      </div>
+                </div>
+            </div>
+            <!-- <h1 class="display-4">Analyze eBooks, and see how authors play with sentence lengths!</h1> -->
+            <div style="padding: 3em;">
+                <p class="lead">
+                    Here are a few sample graphs to help you get an idea.
+                  </p>
+                <div class="row" id="homePageGrid">
+                </div>
+            </div>
         </div>
-        <div class="tab-pane fade show active" id="Create" role="tabpanel" aria-labelledby="Create-tab">
+        <div class="tab-pane fade" id="Create" role="tabpanel" aria-labelledby="Create-tab">
             <div class="container" style="padding: 1em;">
                 <div class="row">
                   <div class="col-2">
@@ -75,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Welcome Contact</div>
+        <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Welcome Contact</div> -->
     </div>
     </div>
 

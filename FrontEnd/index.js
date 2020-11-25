@@ -1,7 +1,9 @@
 'use strict';
 
 $(document).ready(function() {
-    // welcome()
+    let homePageGrid = $('#homePageGrid')
+    homePageGrid.html("")
+    generateGraphCard()
 })
 
 let createHistogramChart = undefined
@@ -86,5 +88,29 @@ let sentenceParserURL = (data)=> {
         createHistogramChart ? createHistogramChart.destroy() : {}
         createHistogramChart = drawHistogram(document.getElementById('histogram').getContext('2d'), dataset)
         saveDataCache(data.ebookUrl, JSON.stringify(dataset))
+    })
+}
+
+let generateGraphCard = () => {
+    let homePageGrid = $('#homePageGrid')
+    $.get(config.queryCacheURL)
+    .done((data)=> {
+        data.forEach( (entity,index) => {
+            let html = `
+            <div class="col-3" style="padding:1em;">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">${entity['ebook']}</h5>
+                        <canvas id="entityHistogram${index}" width="300" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+            `
+            homePageGrid.append(html)
+            // createHistogramChart ? createHistogramChart.destroy() : {}
+            drawHistogram(document.getElementById("entityHistogram" + index).getContext('2d'), JSON.parse(entity['dataset']))
+        })
+    }).fail((error)=> {
+        console.error(error)
     })
 }
