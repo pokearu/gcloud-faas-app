@@ -4,6 +4,11 @@ const {Datastore} = require('@google-cloud/datastore');
 
 const datastore = new Datastore();
 
+/**
+ * HTTP Cloud function to handle OPTIONS, GET, POST requests
+ * @param {Object} req Cloud Function request context.
+ * @param {Object} res Cloud Function response context.
+ */
 exports.dataCache = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     switch (req.method) {
@@ -54,6 +59,11 @@ exports.dataCache = (req, res) => {
     }
 }
 
+/**
+ * HTTP Cloud function to handle OPTIONS, GET requests
+ * @param {Object} req Cloud Function request context.
+ * @param {Object} res Cloud Function response context.
+ */
 exports.queryCache = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     switch (req.method) {

@@ -11,8 +11,16 @@ let createHistogramChart = undefined
 
 let gradients = ["rgb(167, 20, 20)", "rgb(4, 61, 33)", "rgb(9, 22, 84)", "rgb(84, 8, 73)", "rgb(210, 71, 14)"]
 
+/**
+ * Function to randomly get RGB for plots
+ */
 let getRGB = () => gradients[Math.floor(Math.random() * gradients.length)]
 
+/**
+ * Function to draw the Histogram
+ * @param {Object} context Canvas context object
+ * @param {Object} data Dataset to plot the Histogram
+ */
 let drawHistogram = (context, data)=> {
     
     var gradient = context.createLinearGradient(0, 0, 1000, 0);
@@ -55,6 +63,9 @@ let drawHistogram = (context, data)=> {
     return chart
 } 
 
+/**
+ * Function to fetch eBook data from cache or trigger sentence parser
+ */
 let getDataCache = ()=> {
     $('#loader').show()
     $('#createHistogramCard').hide()
@@ -78,6 +89,11 @@ let getDataCache = ()=> {
     })
 }
 
+/**
+ * Function to create a new entity in the Datastore
+ * @param {String} key Datastore entity key
+ * @param {Object} dataset Data to store in entity property dataset
+ */
 let saveDataCache = (key, dataset)=> {
     let data = {
         "ebookUrl": key,
@@ -89,6 +105,10 @@ let saveDataCache = (key, dataset)=> {
     })
 }
 
+/**
+ * Function to trigger sentence parser and initiates result plot
+ * @param {Object} data Object with the eBook URL
+ */
 let sentenceParserURL = (data)=> {
     $.post(config.sentenceParserURL, data)
     .done((dataset)=> {
@@ -100,6 +120,9 @@ let sentenceParserURL = (data)=> {
     })
 }
 
+/**
+ * Function to fetch query result entities and load the Home page
+ */
 let generateGraphCard = () => {
     let homePageGrid = $('#homePageGrid')
     $.get(config.queryCacheURL)

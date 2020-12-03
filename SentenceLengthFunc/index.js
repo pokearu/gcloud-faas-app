@@ -2,6 +2,11 @@
 
 const request = require('request');
 
+/**
+ * HTTP Cloud function to handle OPTIONS, POST requests
+ * @param {Object} req Cloud Function request context.
+ * @param {Object} res Cloud Function response context.
+ */
 exports.sentenceParser = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     switch (req.method) {
