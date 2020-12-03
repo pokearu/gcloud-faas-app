@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(function() {
+    $('#homeLoader').show()
     let homePageGrid = $('#homePageGrid')
     homePageGrid.html("")
     generateGraphCard()
@@ -8,10 +9,14 @@ $(document).ready(function() {
 
 let createHistogramChart = undefined
 
+let gradients = ["rgb(167, 20, 20)", "rgb(4, 61, 33)", "rgb(9, 22, 84)", "rgb(84, 8, 73)", "rgb(210, 71, 14)"]
+
+let getRGB = () => gradients[Math.floor(Math.random() * gradients.length)]
+
 let drawHistogram = (context, data)=> {
     
     var gradient = context.createLinearGradient(0, 0, 1000, 0);
-    gradient.addColorStop(0, "rgb(4, 61, 33)");
+    gradient.addColorStop(0, getRGB());
     gradient.addColorStop(1, "rgb(228, 227, 227)");
 
     const chart = new Chart(context, {
@@ -51,6 +56,8 @@ let drawHistogram = (context, data)=> {
 } 
 
 let getDataCache = ()=> {
+    $('#loader').show()
+    $('#createHistogramCard').hide()
     let data = {
         "ebookUrl": $('#ebookUrl').val()
     }
@@ -61,6 +68,7 @@ let getDataCache = ()=> {
             return 
         }
         console.log("Found ebook in data cache")
+        $('#loader').hide()
         $('#createHistogramCard').show()
         createHistogramChart ? createHistogramChart.destroy() : {}
         createHistogramChart = drawHistogram(document.getElementById('histogram').getContext('2d'),JSON.parse(cacheData[0]['dataset']))
@@ -84,6 +92,7 @@ let saveDataCache = (key, dataset)=> {
 let sentenceParserURL = (data)=> {
     $.post(config.sentenceParserURL, data)
     .done((dataset)=> {
+        $('#loader').hide()
         $('#createHistogramCard').show()
         createHistogramChart ? createHistogramChart.destroy() : {}
         createHistogramChart = drawHistogram(document.getElementById('histogram').getContext('2d'), dataset)
@@ -100,16 +109,18 @@ let generateGraphCard = () => {
             <div class="col-3" style="padding:1em;">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">${entity['ebook']}</h5>
+                    <h5 class="card-title">
+                      <a href="${entity['ebook']}" style="text-decoration: none; color:black;" target="_blank">${entity['ebook']}</a>
+                    </h5>
                         <canvas id="entityHistogram${index}" width="300" height="300"></canvas>
                     </div>
                 </div>
             </div>
             `
             homePageGrid.append(html)
-            // createHistogramChart ? createHistogramChart.destroy() : {}
             drawHistogram(document.getElementById("entityHistogram" + index).getContext('2d'), JSON.parse(entity['dataset']))
         })
+        $('#homeLoader').hide()
     }).fail((error)=> {
         console.error(error)
     })

@@ -13,11 +13,6 @@ exports.sentenceParser = (req, res) => {
                 res.status(204).send('')
                 break
             }
-        case 'GET':
-            {
-                res.status(200).send("Welcome")
-                break
-            }
         case 'POST':
             {
                 let ebookUrl = req.body.ebookUrl
@@ -30,7 +25,6 @@ exports.sentenceParser = (req, res) => {
 
                     let intermediateMap = sentences.reduce((acc,sentence) => {
                         let key = sentence.split(" ").length
-                        // return {...acc, [key]: [...(acc[key] || []), sentence]}
                         return {...acc, [key]: acc[key] + 1 || 1}
                     }, sentenceMap)
 

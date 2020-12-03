@@ -25,7 +25,6 @@
           <div class="nav navbar-nav">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
             <a class="nav-link" id="Create-tab" data-toggle="tab" href="#Create" role="tab" aria-controls="Create" aria-selected="false">Create</a>
-            <!-- <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a> -->
           </div>
         </div>
     </nav>
@@ -36,16 +35,20 @@
                     <div class="col-md-8 order-md-1 text-center text-md-left pr-md-5">
                         <h1 class="mb-3">Analyze eBooks, and see how authors play with sentence lengths!</h1>
                         <p class="lead mb-4">
-                            Here we take different eBooks from the <a href="http://www.gutenberg.org/" target="_blank">Gutenberg project</a> and run analysis. We are a simple FaaS application that runs on GCloud! The App parses the the plain text version of the eBooks and draws a histogram of the senetence length distribution. Feel free to hit <strong>Create</strong> and try us out.
+                            Here we take different eBooks from the <a href="http://www.gutenberg.org/" target="_blank">Gutenberg project</a> and run analysis. We are a simple FaaS application that runs on GCloud! The App parses the the plain text version of the eBooks and draws a histogram of the sentence length distribution. We also take advantage of GCloud Datastore to remember your results in case you want to run it again!  Feel free to hit <strong>Create</strong> and try us out.
                         </p>
                       </div>
                 </div>
             </div>
-            <!-- <h1 class="display-4">Analyze eBooks, and see how authors play with sentence lengths!</h1> -->
             <div style="padding: 3em;">
                 <p class="lead">
                     Here are a few sample graphs to help you get an idea.
-                  </p>
+                </p>
+                <div class="text-center" id="homeLoader" style="display: none;">
+                  <div class="spinner-grow" style="width: 5rem; height: 5rem; color: cadetblue;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
                 <div class="row" id="homePageGrid">
                 </div>
             </div>
@@ -59,18 +62,13 @@
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">Enter a book URL</h5>
-                          <!-- <h6 class="card-subtitle mb-2 text-muted"></h6> -->
                           <p class="card-text text-muted">Enter a URL of the ebook you wish to analyze. Ex: 
                               <a target="_blank" href="http://www.gutenberg.org/files/1342/1342-0.txt">Pride and Prejudice</a>
                             </p>
                             <div class="form-group">
-                                <!-- <label for="ebookUrl">Email address</label> -->
                                 <input type="url" class="form-control" id="ebookUrl" aria-describedby="ebookUrlHelp" placeholder="http://www.gutenberg.org/files/1342/1342-0.txt">
-                                <!-- <small id="ebookUrlHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                               </div>
                             <button onclick="getDataCache()" class="btn btn-primary">Submit</button>
-                          <!-- <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a> -->
                         </div>
                       </div>                  
                   </div>
@@ -81,6 +79,11 @@
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
+                      <div class="text-center" id="loader" style="display: none;">
+                        <div class="spinner-grow" style="width: 5rem; height: 5rem; color: cadetblue;" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                      </div>
                         <div class="card" id="createHistogramCard" style="display: none;">
                             <div class="card-body">
                               <h5 class="card-title">Sentence Length distribution</h5>
@@ -92,7 +95,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Welcome Contact</div> -->
     </div>
     </div>
 

@@ -47,7 +47,7 @@ exports.dataCache = (req, res) => {
                     res.status(201).send(apiResponse)
                 }).catch((error) => {
                     console.error(error)
-                    res.status(400).send(error.message)
+                    res.status(500).send(error.message)
                 })
                 break
             }
